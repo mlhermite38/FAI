@@ -3,75 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Impact File</title>
+    <title>Collaborative Impact File - Petzl</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Petzl Brand Identity */
+        :root {
+            --petzl-blue: #003c71;
+            --petzl-yellow: #ffed00;
+            --petzl-text-dark: #3c3c3b;
+            --petzl-text-light: #555555;
+            --petzl-background: #ffffff;
+            --petzl-border: #e0e0e0;
+            --status-complete-bg: #dcfce7;
+            --status-complete-text: #166534;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: var(--petzl-text-dark);
         }
         .card {
-            background-color: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            background-color: var(--petzl-background);
+            border-radius: 0.5rem;
+            border: 1px solid var(--petzl-border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             transition: all 0.3s ease-in-out;
         }
         .card-header {
-            border-bottom: 1px solid #e5e7eb; /* gray-200 */
+            border-bottom: 1px solid var(--petzl-border);
         }
         .form-label {
             font-weight: 500;
-            color: #374151; /* gray-700 */
+            color: var(--petzl-text-dark);
         }
         .form-input, .form-textarea, .form-select {
             width: 100%;
-            border-radius: 0.5rem;
-            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.375rem;
+            border: 1px solid var(--petzl-border);
             padding: 0.75rem;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
         .form-input:focus, .form-textarea:focus, .form-select:focus {
             outline: none;
-            border-color: #2563eb; /* blue-600 */
-            box-shadow: 0 0 0 2px #bfdbfe; /* blue-200 */
+            border-color: var(--petzl-blue);
+            box-shadow: 0 0 0 2px rgba(0, 60, 113, 0.2);
         }
         .form-input:disabled, .form-textarea:disabled, .form-select:disabled {
-            background-color: #f3f4f6; /* gray-100 */
+            background-color: #f9f9f9;
             cursor: not-allowed;
-            color: #6b7280; /* gray-500 */
+            color: #888888;
         }
         .status-badge {
-            padding: 0.25rem 0.75rem;
+            padding: 0.375rem 0.875rem;
             border-radius: 9999px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        .status-new { background-color: #dbeafe; color: #1e40af; } /* blue-100/blue-800 */
-        .status-assessment { background-color: #fef9c3; color: #854d0e; } /* yellow-100/yellow-800 */
-        .status-complete { background-color: #dcfce7; color: #166534; } /* green-100/green-800 */
+        .status-new { background-color: var(--petzl-blue); color: white; }
+        .status-assessment { background-color: var(--petzl-yellow); color: var(--petzl-text-dark); }
+        .status-complete { background-color: var(--status-complete-bg); color: var(--status-complete-text); }
+        
         .btn {
             padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
+            border-radius: 0.375rem;
+            font-weight: 700;
             text-align: center;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             cursor: pointer;
+            border: 2px solid transparent;
         }
         .btn-primary {
-            background-color: #2563eb; /* blue-600 */
-            color: white;
+            background-color: var(--petzl-yellow);
+            color: var(--petzl-text-dark);
         }
         .btn-primary:hover {
-            background-color: #1d4ed8; /* blue-700 */
+            background-color: #fff88f;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .btn-disabled {
-            background-color: #9ca3af; /* gray-400 */
+            background-color: #e0e0e0;
+            color: #9e9e9e;
             cursor: not-allowed;
         }
+        .btn-disabled:hover {
+            background-color: #e0e0e0;
+            box-shadow: none;
+        }
+
         .section-locked .section-content {
             opacity: 0.7;
+            pointer-events: none;
+        }
+        .petzl-header-logo {
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--petzl-blue);
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -79,12 +111,13 @@
 
     <div class="max-w-4xl mx-auto">
         <!-- Header -->
-        <div class="card mb-6 p-4 flex justify-between items-center">
+        <div class="mb-6 p-4 flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-bold text-gray-800">Collaborative Impact File</h1>
-                <p class="text-gray-500" id="header-standard">Standard: (Not yet defined)</p>
+                <div class="petzl-header-logo">PETZL</div>
+                <h1 class="text-xl font-bold text-gray-700">Collaborative Impact File</h1>
             </div>
             <div id="status-container" class="text-right">
+                <p class="text-sm text-gray-500 mb-1" id="header-standard">Standard: (Not defined)</p>
                 <span id="status-badge" class="status-badge status-new">New</span>
             </div>
         </div>
@@ -95,7 +128,7 @@
             <!-- Part A: Standardization Expert -->
             <div id="part-a" class="card">
                 <div class="card-header p-4 flex justify-between items-center">
-                    <h2 class="text-xl font-semibold text-gray-700"><i class="fas fa-user-tie mr-2 text-blue-500"></i>Part A: Standardization Expert's Input</h2>
+                    <h2 class="text-xl font-semibold"><i class="fas fa-user-tie mr-3" style="color: var(--petzl-blue);"></i>Part A: Standardization Expert's Input</h2>
                     <i id="part-a-lock" class="fas fa-lock-open text-gray-400"></i>
                 </div>
                 <div class="p-6 space-y-6 section-content">
@@ -161,9 +194,9 @@
                     </div>
 
                     <!-- Action Button for Part A -->
-                    <div class="pt-4 border-t border-gray-200">
-                        <button type="button" id="submit-for-assessment" class="btn btn-primary w-full md:w-auto">
-                            <i class="fas fa-paper-plane mr-2"></i>Submit for Technical Assessment
+                    <div class="pt-4 mt-4 border-t border-gray-200 text-right">
+                        <button type="button" id="submit-for-assessment" class="btn btn-primary">
+                            Submit for Technical Assessment <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
@@ -172,7 +205,7 @@
             <!-- Part B: Technical Team -->
             <div id="part-b" class="card section-locked">
                 <div class="card-header p-4 flex justify-between items-center">
-                    <h2 class="text-xl font-semibold text-gray-700"><i class="fas fa-cogs mr-2 text-yellow-500"></i>Part B: Technical Team's Assessment</h2>
+                    <h2 class="text-xl font-semibold"><i class="fas fa-cogs mr-3" style="color: var(--petzl-text-dark);"></i>Part B: Technical Team's Assessment</h2>
                      <i id="part-b-lock" class="fas fa-lock text-gray-400"></i>
                 </div>
                 <div class="p-6 space-y-6 section-content">
@@ -191,8 +224,8 @@
                         <textarea id="action-plan" name="action-plan" rows="6" class="form-textarea" placeholder="Detail the impact on products, tests, and labs. Propose a concrete action plan with tests to be performed, resources needed, etc." disabled></textarea>
                     </div>
                      <!-- Action Button for Part B -->
-                    <div class="pt-4 border-t border-gray-200">
-                        <button type="button" id="finalize-assessment" class="btn btn-primary w-full md:w-auto btn-disabled">
+                    <div class="pt-4 mt-4 border-t border-gray-200 text-right">
+                        <button type="button" id="finalize-assessment" class="btn btn-primary btn-disabled">
                             <i class="fas fa-check-circle mr-2"></i>Finalize Assessment
                         </button>
                     </div>
@@ -230,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update header as standard is typed
     standardInput.addEventListener('input', () => {
-        headerStandard.textContent = standardInput.value ? `Standard: ${standardInput.value}` : 'Standard: (Not yet defined)';
+        headerStandard.textContent = standardInput.value ? `Standard: ${standardInput.value}` : 'Standard: (Not defined)';
     });
 
     // Handle file input change
@@ -242,10 +275,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ---FUNCTIONS---
 
-    /**
-     * Handles the display of the uploaded file.
-     * Shows an image preview for images, or the file name for other types (like PDF).
-     */
     function handleFileChange() {
         filePreview.innerHTML = '';
         const file = fileInput.files[0];
@@ -269,12 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    /**
-     * Simulates the expert submitting their part.
-     * Locks Part A, unlocks Part B, and updates the status.
-     */
     function submitForAssessment() {
-        // Simple validation
         let isValid = true;
         partAInputs.forEach(input => {
             if (input.required && !input.value) {
@@ -292,7 +316,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Lock Part A
         partA.classList.add('section-locked');
-        partAInputs.forEach(input => input.disabled = true);
         partALockIcon.classList.remove('fa-lock-open');
         partALockIcon.classList.add('fa-lock');
         submitBtn.classList.add('btn-disabled');
@@ -306,18 +329,14 @@ document.addEventListener('DOMContentLoaded', function() {
         finalizeBtn.classList.remove('btn-disabled');
         finalizeBtn.disabled = false;
         
-        // Auto-fill assessment date
         assessmentDateInput.value = new Date().toISOString().split('T')[0];
 
         // Update status
         statusBadge.textContent = 'In Assessment';
         statusBadge.className = 'status-badge status-assessment';
+        partB.querySelector('h2 i').style.color = 'var(--petzl-text-dark)';
     }
 
-    /**
-     * Simulates the technical team finalizing their assessment.
-     * Locks Part B and updates the status.
-     */
     function finalizeAssessment() {
         let isValid = true;
          partBInputs.forEach(input => {
@@ -336,15 +355,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Lock Part B
         partB.classList.add('section-locked');
-        partBInputs.forEach(input => input.disabled = true);
         partBLockIcon.classList.remove('fa-lock-open');
         partBLockIcon.classList.add('fa-lock');
         finalizeBtn.classList.add('btn-disabled');
         finalizeBtn.disabled = true;
 
         // Update status
-        statusBadge.textContent = 'Assessment Complete';
+        statusBadge.textContent = 'Complete';
         statusBadge.className = 'status-badge status-complete';
+        partB.querySelector('h2 i').style.color = 'var(--status-complete-text)';
     }
 });
 </script>
