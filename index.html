@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Impact File - Petzl</title>
+    <title>Fiche d'Impact Collaborative - Petzl</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -114,11 +114,11 @@
         <div class="mb-6 p-4 flex justify-between items-center">
             <div>
                 <div class="petzl-header-logo">PETZL</div>
-                <h1 class="text-xl font-bold text-gray-700">Collaborative Impact File</h1>
+                <h1 class="text-xl font-bold text-gray-700">Fiche d'Impact Collaborative</h1>
             </div>
             <div id="status-container" class="text-right">
-                <p class="text-sm text-gray-500 mb-1" id="header-standard">Standard: (Not defined)</p>
-                <span id="status-badge" class="status-badge status-new">New</span>
+                <p class="text-sm text-gray-500 mb-1" id="header-standard">Norme : (Non définie)</p>
+                <span id="status-badge" class="status-badge status-new">Nouveau</span>
             </div>
         </div>
 
@@ -128,18 +128,18 @@
             <!-- Part A: Standardization Expert -->
             <div id="part-a" class="card">
                 <div class="card-header p-4 flex justify-between items-center">
-                    <h2 class="text-xl font-semibold"><i class="fas fa-user-tie mr-3" style="color: var(--petzl-blue);"></i>Part A: Standardization Expert's Input</h2>
+                    <h2 class="text-xl font-semibold"><i class="fas fa-user-tie mr-3" style="color: var(--petzl-blue);"></i>Partie A : Saisie de l'Expert Normalisation</h2>
                     <i id="part-a-lock" class="fas fa-lock-open text-gray-400"></i>
                 </div>
                 <div class="p-6 space-y-6 section-content">
                     <!-- Row 1: Standard & Document -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="standard" class="form-label block mb-2">Standard</label>
-                            <input type="text" id="standard" name="standard" class="form-input" placeholder="e.g., EN 361, NFPA 1983" required>
+                            <label for="standard" class="form-label block mb-2">Norme</label>
+                            <input type="text" id="standard" name="standard" class="form-input" placeholder="Ex : EN 361, NFPA 1983" required>
                         </div>
                         <div>
-                            <label for="document" class="form-label block mb-2">Standardization Document</label>
+                            <label for="document" class="form-label block mb-2">Document de Normalisation</label>
                             <input type="file" id="document" name="document" class="form-input" accept="image/*,application/pdf">
                             <div id="file-preview" class="mt-2"></div>
                         </div>
@@ -149,54 +149,54 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="expert" class="form-label block mb-2">Expert</label>
-                            <input type="text" id="expert" name="expert" class="form-input" placeholder="Your Name" required>
+                            <input type="text" id="expert" name="expert" class="form-input" placeholder="Votre nom" required>
                         </div>
                         <div>
-                            <label for="maturity-level" class="form-label block mb-2">Standardization Maturity Level (SML)</label>
+                            <label for="maturity-level" class="form-label block mb-2">Niveau de Maturité Normalisation (NMN)</label>
                             <select id="maturity-level" name="maturity-level" class="form-select" required>
-                                <option value="" disabled selected>Select maturity level...</option>
-                                <option value="1">SML 1: Monitoring (Early idea)</option>
-                                <option value="2">SML 2: Analysis (Draft/Testing)</option>
-                                <option value="3">SML 3: Positioning (Stabilizing)</option>
-                                <option value="4">SML 4: Integration (Approved)</option>
+                                <option value="" disabled selected>Sélectionnez le niveau de maturité...</option>
+                                <option value="1">NMN 1 : Veille (Idée émergente)</option>
+                                <option value="2">NMN 2 : Analyse (Projet/Essais)</option>
+                                <option value="3">NMN 3 : Positionnement (Stabilisation)</option>
+                                <option value="4">NMN 4 : Intégration (Approuvé)</option>
                             </select>
                         </div>
                     </div>
 
                     <!-- Textareas -->
                     <div>
-                        <label for="context" class="form-label block mb-2">Context of Evolution</label>
-                        <textarea id="context" name="context" rows="3" class="form-textarea" placeholder="Describe the background and discussions in the committee."></textarea>
+                        <label for="context" class="form-label block mb-2">Contexte de l'évolution</label>
+                        <textarea id="context" name="context" rows="3" class="form-textarea" placeholder="Décrire le contexte et les discussions en comité."></textarea>
                     </div>
                     <div>
-                        <label for="why" class="form-label block mb-2">Why this Evolution?</label>
-                        <textarea id="why" name="why" rows="3" class="form-textarea" placeholder="What is the stated goal? (e.g., improve reproducibility, address an accident, new technology)"></textarea>
+                        <label for="why" class="form-label block mb-2">Pourquoi cette évolution ?</label>
+                        <textarea id="why" name="why" rows="3" class="form-textarea" placeholder="Quel est l'objectif annoncé ? (ex: améliorer la reproductibilité, répondre à un accident, nouvelle technologie)"></textarea>
                     </div>
                     <div>
-                        <label for="what-changed" class="form-label block mb-2">What Has Changed?</label>
-                        <textarea id="what-changed" name="what-changed" rows="4" class="form-textarea" placeholder="Describe the new requirement, test method, or modification in detail." required></textarea>
+                        <label for="what-changed" class="form-label block mb-2">Qu'est-ce qui a changé ?</label>
+                        <textarea id="what-changed" name="what-changed" rows="4" class="form-textarea" placeholder="Décrire en détail la nouvelle exigence, méthode de test ou modification." required></textarea>
                     </div>
 
                     <!-- Products & Deadline -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="current-products" class="form-label block mb-2">Current Products Concerned</label>
-                            <input type="text" id="current-products" name="current-products" class="form-input" placeholder="e.g., AVAO Harnesses, ABSORBICA">
+                            <label for="current-products" class="form-label block mb-2">Produits actuels concernés</label>
+                            <input type="text" id="current-products" name="current-products" class="form-input" placeholder="Ex : Harnais AVAO, ABSORBICA">
                         </div>
                         <div>
-                            <label for="new-dev" class="form-label block mb-2">New Development Projects Concerned</label>
-                            <input type="text" id="new-dev" name="new-dev" class="form-input" placeholder="e.g., Project Condor, Lanyard Gen 5">
+                            <label for="new-dev" class="form-label block mb-2">Nouveaux projets de développement concernés</label>
+                            <input type="text" id="new-dev" name="new-dev" class="form-input" placeholder="Ex : Projet Condor, Longe Gen 5">
                         </div>
                     </div>
                      <div>
-                        <label for="deadline" class="form-label block mb-2">Deadline for Technical Feedback</label>
+                        <label for="deadline" class="form-label block mb-2">Date limite pour retour technique</label>
                         <input type="date" id="deadline" name="deadline" class="form-input" required>
                     </div>
 
                     <!-- Action Button for Part A -->
                     <div class="pt-4 mt-4 border-t border-gray-200 text-right">
                         <button type="button" id="submit-for-assessment" class="btn btn-primary">
-                            Submit for Technical Assessment <i class="fas fa-arrow-right ml-2"></i>
+                            Soumettre pour Évaluation Technique <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
@@ -205,28 +205,28 @@
             <!-- Part B: Technical Team -->
             <div id="part-b" class="card section-locked">
                 <div class="card-header p-4 flex justify-between items-center">
-                    <h2 class="text-xl font-semibold"><i class="fas fa-cogs mr-3" style="color: var(--petzl-text-dark);"></i>Part B: Technical Team's Assessment</h2>
+                    <h2 class="text-xl font-semibold"><i class="fas fa-cogs mr-3" style="color: var(--petzl-text-dark);"></i>Partie B : Évaluation de l'Équipe Technique</h2>
                      <i id="part-b-lock" class="fas fa-lock text-gray-400"></i>
                 </div>
                 <div class="p-6 space-y-6 section-content">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="assessed-by" class="form-label block mb-2">Assessed By (Team/Lead)</label>
-                            <input type="text" id="assessed-by" name="assessed-by" class="form-input" placeholder="e.g., Lab Team / J. Doe" disabled>
+                            <label for="assessed-by" class="form-label block mb-2">Évalué par (Équipe/Leader)</label>
+                            <input type="text" id="assessed-by" name="assessed-by" class="form-input" placeholder="Ex : Équipe Labo / J. Dupont" disabled>
                         </div>
                         <div>
-                            <label for="assessment-date" class="form-label block mb-2">Date of Assessment</label>
+                            <label for="assessment-date" class="form-label block mb-2">Date de l'évaluation</label>
                             <input type="date" id="assessment-date" name="assessment-date" class="form-input" disabled>
                         </div>
                     </div>
                     <div>
-                        <label for="action-plan" class="form-label block mb-2">Action Plan & Impact Analysis</label>
-                        <textarea id="action-plan" name="action-plan" rows="6" class="form-textarea" placeholder="Detail the impact on products, tests, and labs. Propose a concrete action plan with tests to be performed, resources needed, etc." disabled></textarea>
+                        <label for="action-plan" class="form-label block mb-2">Plan d'Action & Analyse d'Impact</label>
+                        <textarea id="action-plan" name="action-plan" rows="6" class="form-textarea" placeholder="Détailler l'impact sur les produits, les tests et le laboratoire. Proposer un plan d'action concret avec les tests à réaliser, les ressources nécessaires, etc." disabled></textarea>
                     </div>
                      <!-- Action Button for Part B -->
                     <div class="pt-4 mt-4 border-t border-gray-200 text-right">
                         <button type="button" id="finalize-assessment" class="btn btn-primary btn-disabled">
-                            <i class="fas fa-check-circle mr-2"></i>Finalize Assessment
+                            <i class="fas fa-check-circle mr-2"></i>Finaliser l'Évaluation
                         </button>
                     </div>
                 </div>
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update header as standard is typed
     standardInput.addEventListener('input', () => {
-        headerStandard.textContent = standardInput.value ? `Standard: ${standardInput.value}` : 'Standard: (Not defined)';
+        headerStandard.textContent = standardInput.value ? `Norme : ${standardInput.value}` : 'Norme : (Non définie)';
     });
 
     // Handle file input change
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (!isValid) {
-            alert('Please fill all required fields in Part A.');
+            alert("Veuillez remplir tous les champs obligatoires de la Partie A.");
             return;
         }
 
@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
         assessmentDateInput.value = new Date().toISOString().split('T')[0];
 
         // Update status
-        statusBadge.textContent = 'In Assessment';
+        statusBadge.textContent = 'En Évaluation';
         statusBadge.className = 'status-badge status-assessment';
         partB.querySelector('h2 i').style.color = 'var(--petzl-text-dark)';
     }
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (!isValid) {
-            alert('Please fill all fields in Part B before finalizing.');
+            alert("Veuillez remplir tous les champs de la Partie B avant de finaliser.");
             return;
         }
 
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
         finalizeBtn.disabled = true;
 
         // Update status
-        statusBadge.textContent = 'Complete';
+        statusBadge.textContent = 'Terminé';
         statusBadge.className = 'status-badge status-complete';
         partB.querySelector('h2 i').style.color = 'var(--status-complete-text)';
     }
