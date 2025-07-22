@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Impact File</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .card-header {
+            border-bottom: 1px solid #e5e7eb; /* gray-200 */
+        }
+        .form-label {
+            font-weight: 500;
+            color: #374151; /* gray-700 */
+        }
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db; /* gray-300 */
+            padding: 0.75rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #2563eb; /* blue-600 */
+            box-shadow: 0 0 0 2px #bfdbfe; /* blue-200 */
+        }
+        .form-input:disabled, .form-textarea:disabled, .form-select:disabled {
+            background-color: #f3f4f6; /* gray-100 */
+            cursor: not-allowed;
+            color: #6b7280; /* gray-500 */
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .status-new { background-color: #dbeafe; color: #1e40af; } /* blue-100/blue-800 */
+        .status-assessment { background-color: #fef9c3; color: #854d0e; } /* yellow-100/yellow-800 */
+        .status-complete { background-color: #dcfce7; color: #166534; } /* green-100/green-800 */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #2563eb; /* blue-600 */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8; /* blue-700 */
+        }
+        .btn-disabled {
+            background-color: #9ca3af; /* gray-400 */
+            cursor: not-allowed;
+        }
+        .section-locked .section-content {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="card mb-6 p-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Collaborative Impact File</h1>
+                <p class="text-gray-500" id="header-standard">Standard: (Not yet defined)</p>
+            </div>
+            <div id="status-container" class="text-right">
+                <span id="status-badge" class="status-badge status-new">New</span>
+            </div>
+        </div>
+
+        <!-- Main Form Container -->
+        <form id="impact-form" class="space-y-6">
+
+            <!-- Part A: Standardization Expert -->
+            <div id="part-a" class="card">
+                <div class="card-header p-4 flex justify-between items-center">
+                    <h2 class="text-xl font-semibold text-gray-700"><i class="fas fa-user-tie mr-2 text-blue-500"></i>Part A: Standardization Expert's Input</h2>
+                    <i id="part-a-lock" class="fas fa-lock-open text-gray-400"></i>
+                </div>
+                <div class="p-6 space-y-6 section-content">
+                    <!-- Row 1: Standard & Document -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="standard" class="form-label block mb-2">Standard</label>
+                            <input type="text" id="standard" name="standard" class="form-input" placeholder="e.g., EN 361, NFPA 1983" required>
+                        </div>
+                        <div>
+                            <label for="document" class="form-label block mb-2">Standardization Document</label>
+                            <input type="file" id="document" name="document" class="form-input" accept="image/*,application/pdf">
+                            <div id="file-preview" class="mt-2"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2: Expert & Maturity Level -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="expert" class="form-label block mb-2">Expert</label>
+                            <input type="text" id="expert" name="expert" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label for="maturity-level" class="form-label block mb-2">Standardization Maturity Level (SML)</label>
+                            <select id="maturity-level" name="maturity-level" class="form-select" required>
+                                <option value="" disabled selected>Select maturity level...</option>
+                                <option value="1">SML 1: Monitoring (Early idea)</option>
+                                <option value="2">SML 2: Analysis (Draft/Testing)</option>
+                                <option value="3">SML 3: Positioning (Stabilizing)</option>
+                                <option value="4">SML 4: Integration (Approved)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Textareas -->
+                    <div>
+                        <label for="context" class="form-label block mb-2">Context of Evolution</label>
+                        <textarea id="context" name="context" rows="3" class="form-textarea" placeholder="Describe the background and discussions in the committee."></textarea>
+                    </div>
+                    <div>
+                        <label for="why" class="form-label block mb-2">Why this Evolution?</label>
+                        <textarea id="why" name="why" rows="3" class="form-textarea" placeholder="What is the stated goal? (e.g., improve reproducibility, address an accident, new technology)"></textarea>
+                    </div>
+                    <div>
+                        <label for="what-changed" class="form-label block mb-2">What Has Changed?</label>
+                        <textarea id="what-changed" name="what-changed" rows="4" class="form-textarea" placeholder="Describe the new requirement, test method, or modification in detail." required></textarea>
+                    </div>
+
+                    <!-- Products & Deadline -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="current-products" class="form-label block mb-2">Current Products Concerned</label>
+                            <input type="text" id="current-products" name="current-products" class="form-input" placeholder="e.g., AVAO Harnesses, ABSORBICA">
+                        </div>
+                        <div>
+                            <label for="new-dev" class="form-label block mb-2">New Development Projects Concerned</label>
+                            <input type="text" id="new-dev" name="new-dev" class="form-input" placeholder="e.g., Project Condor, Lanyard Gen 5">
+                        </div>
+                    </div>
+                     <div>
+                        <label for="deadline" class="form-label block mb-2">Deadline for Technical Feedback</label>
+                        <input type="date" id="deadline" name="deadline" class="form-input" required>
+                    </div>
+
+                    <!-- Action Button for Part A -->
+                    <div class="pt-4 border-t border-gray-200">
+                        <button type="button" id="submit-for-assessment" class="btn btn-primary w-full md:w-auto">
+                            <i class="fas fa-paper-plane mr-2"></i>Submit for Technical Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part B: Technical Team -->
+            <div id="part-b" class="card section-locked">
+                <div class="card-header p-4 flex justify-between items-center">
+                    <h2 class="text-xl font-semibold text-gray-700"><i class="fas fa-cogs mr-2 text-yellow-500"></i>Part B: Technical Team's Assessment</h2>
+                     <i id="part-b-lock" class="fas fa-lock text-gray-400"></i>
+                </div>
+                <div class="p-6 space-y-6 section-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="assessed-by" class="form-label block mb-2">Assessed By (Team/Lead)</label>
+                            <input type="text" id="assessed-by" name="assessed-by" class="form-input" placeholder="e.g., Lab Team / J. Doe" disabled>
+                        </div>
+                        <div>
+                            <label for="assessment-date" class="form-label block mb-2">Date of Assessment</label>
+                            <input type="date" id="assessment-date" name="assessment-date" class="form-input" disabled>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="action-plan" class="form-label block mb-2">Action Plan & Impact Analysis</label>
+                        <textarea id="action-plan" name="action-plan" rows="6" class="form-textarea" placeholder="Detail the impact on products, tests, and labs. Propose a concrete action plan with tests to be performed, resources needed, etc." disabled></textarea>
+                    </div>
+                     <!-- Action Button for Part B -->
+                    <div class="pt-4 border-t border-gray-200">
+                        <button type="button" id="finalize-assessment" class="btn btn-primary w-full md:w-auto btn-disabled">
+                            <i class="fas fa-check-circle mr-2"></i>Finalize Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // ---ELEMENT SELECTORS---
+    const form = document.getElementById('impact-form');
+    const partA = document.getElementById('part-a');
+    const partB = document.getElementById('part-b');
+    const partALockIcon = document.getElementById('part-a-lock');
+    const partBLockIcon = document.getElementById('part-b-lock');
+
+    const standardInput = document.getElementById('standard');
+    const headerStandard = document.getElementById('header-standard');
+    const statusBadge = document.getElementById('status-badge');
+
+    const fileInput = document.getElementById('document');
+    const filePreview = document.getElementById('file-preview');
+
+    const submitBtn = document.getElementById('submit-for-assessment');
+    const finalizeBtn = document.getElementById('finalize-assessment');
+    
+    const assessmentDateInput = document.getElementById('assessment-date');
+
+    // ---INPUT GROUPS---
+    const partAInputs = partA.querySelectorAll('input, textarea, select');
+    const partBInputs = partB.querySelectorAll('input, textarea, select');
+
+    // ---EVENT LISTENERS---
+    
+    // Update header as standard is typed
+    standardInput.addEventListener('input', () => {
+        headerStandard.textContent = standardInput.value ? `Standard: ${standardInput.value}` : 'Standard: (Not yet defined)';
+    });
+
+    // Handle file input change
+    fileInput.addEventListener('change', handleFileChange);
+
+    // Handle button clicks
+    submitBtn.addEventListener('click', submitForAssessment);
+    finalizeBtn.addEventListener('click', finalizeAssessment);
+
+    // ---FUNCTIONS---
+
+    /**
+     * Handles the display of the uploaded file.
+     * Shows an image preview for images, or the file name for other types (like PDF).
+     */
+    function handleFileChange() {
+        filePreview.innerHTML = '';
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'mt-2 rounded-lg max-h-48 border border-gray-200';
+                filePreview.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        } else {
+            const fileInfo = document.createElement('div');
+            fileInfo.className = 'mt-2 p-3 bg-gray-100 rounded-lg text-gray-700 text-sm flex items-center';
+            const icon = file.type === 'application/pdf' ? 'fa-file-pdf' : 'fa-file-alt';
+            fileInfo.innerHTML = `<i class="fas ${icon} mr-2 text-red-500"></i> ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+            filePreview.appendChild(fileInfo);
+        }
+    }
+
+    /**
+     * Simulates the expert submitting their part.
+     * Locks Part A, unlocks Part B, and updates the status.
+     */
+    function submitForAssessment() {
+        // Simple validation
+        let isValid = true;
+        partAInputs.forEach(input => {
+            if (input.required && !input.value) {
+                isValid = false;
+                input.style.borderColor = 'red';
+            } else {
+                 input.style.borderColor = '';
+            }
+        });
+
+        if (!isValid) {
+            alert('Please fill all required fields in Part A.');
+            return;
+        }
+
+        // Lock Part A
+        partA.classList.add('section-locked');
+        partAInputs.forEach(input => input.disabled = true);
+        partALockIcon.classList.remove('fa-lock-open');
+        partALockIcon.classList.add('fa-lock');
+        submitBtn.classList.add('btn-disabled');
+        submitBtn.disabled = true;
+
+        // Unlock Part B
+        partB.classList.remove('section-locked');
+        partBInputs.forEach(input => input.disabled = false);
+        partBLockIcon.classList.remove('fa-lock');
+        partBLockIcon.classList.add('fa-lock-open');
+        finalizeBtn.classList.remove('btn-disabled');
+        finalizeBtn.disabled = false;
+        
+        // Auto-fill assessment date
+        assessmentDateInput.value = new Date().toISOString().split('T')[0];
+
+        // Update status
+        statusBadge.textContent = 'In Assessment';
+        statusBadge.className = 'status-badge status-assessment';
+    }
+
+    /**
+     * Simulates the technical team finalizing their assessment.
+     * Locks Part B and updates the status.
+     */
+    function finalizeAssessment() {
+        let isValid = true;
+         partBInputs.forEach(input => {
+            if (!input.value) { // All fields in part B are considered required for finalization
+                isValid = false;
+                input.style.borderColor = 'red';
+            } else {
+                 input.style.borderColor = '';
+            }
+        });
+
+        if (!isValid) {
+            alert('Please fill all fields in Part B before finalizing.');
+            return;
+        }
+
+        // Lock Part B
+        partB.classList.add('section-locked');
+        partBInputs.forEach(input => input.disabled = true);
+        partBLockIcon.classList.remove('fa-lock-open');
+        partBLockIcon.classList.add('fa-lock');
+        finalizeBtn.classList.add('btn-disabled');
+        finalizeBtn.disabled = true;
+
+        // Update status
+        statusBadge.textContent = 'Assessment Complete';
+        statusBadge.className = 'status-badge status-complete';
+    }
+});
+</script>
+
+</body>
+</html>
