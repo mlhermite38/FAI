@@ -12,8 +12,8 @@
         :root {
             --petzl-blue: #003c71;
             --petzl-yellow: #ffed00;
+            --petzl-orange: #ff8c00;
             --petzl-text-dark: #3c3c3b;
-            --petzl-text-light: #555555;
             --petzl-background: #ffffff;
             --petzl-border: #e0e0e0;
             --status-complete-bg: #dcfce7;
@@ -66,6 +66,7 @@
         }
         .status-new { background-color: var(--petzl-blue); color: white; }
         .status-assessment { background-color: var(--petzl-yellow); color: var(--petzl-text-dark); }
+        .status-lab { background-color: var(--petzl-orange); color: white; }
         .status-complete { background-color: var(--status-complete-bg); color: var(--status-complete-text); }
         
         .btn {
@@ -132,73 +133,24 @@
                     <i id="part-a-lock" class="fas fa-lock-open text-gray-400"></i>
                 </div>
                 <div class="p-6 space-y-6 section-content">
-                    <!-- Row 1: Standard & Document -->
+                    <!-- Fields for Part A -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="standard" class="form-label block mb-2">Norme</label>
-                            <input type="text" id="standard" name="standard" class="form-input" placeholder="Ex : EN 361, NFPA 1983" required>
-                        </div>
-                        <div>
-                            <label for="document" class="form-label block mb-2">Document de Normalisation</label>
-                            <input type="file" id="document" name="document" class="form-input" accept="image/*,application/pdf">
-                            <div id="file-preview" class="mt-2"></div>
-                        </div>
+                        <div><label for="standard" class="form-label block mb-2">Norme</label><input type="text" id="standard" name="standard" class="form-input" placeholder="Ex : EN 361, NFPA 1983" required></div>
+                        <div><label for="document" class="form-label block mb-2">Document de Normalisation</label><input type="file" id="document" name="document" class="form-input" accept="image/*,application/pdf"><div id="file-preview" class="mt-2"></div></div>
                     </div>
-                    
-                    <!-- Row 2: Expert & Maturity Level -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="expert" class="form-label block mb-2">Expert</label>
-                            <input type="text" id="expert" name="expert" class="form-input" placeholder="Votre nom" required>
-                        </div>
-                        <div>
-                            <label for="maturity-level" class="form-label block mb-2">Niveau de Maturité Normalisation (NMN)</label>
-                            <select id="maturity-level" name="maturity-level" class="form-select" required>
-                                <option value="" disabled selected>Sélectionnez le niveau de maturité...</option>
-                                <option value="1">NMN 1 : Veille (Idée émergente)</option>
-                                <option value="2">NMN 2 : Analyse (Projet/Essais)</option>
-                                <option value="3">NMN 3 : Positionnement (Stabilisation)</option>
-                                <option value="4">NMN 4 : Intégration (Approuvé)</option>
-                            </select>
-                        </div>
+                        <div><label for="expert" class="form-label block mb-2">Expert</label><input type="text" id="expert" name="expert" class="form-input" placeholder="Votre nom" required></div>
+                        <div><label for="maturity-level" class="form-label block mb-2">Niveau de Maturité Normalisation (NMN)</label><select id="maturity-level" name="maturity-level" class="form-select" required><option value="" disabled selected>Sélectionnez le niveau...</option><option value="1">NMN 1 : Veille</option><option value="2">NMN 2 : Analyse</option><option value="3">NMN 3 : Positionnement</option><option value="4">NMN 4 : Intégration</option></select></div>
                     </div>
-
-                    <!-- Textareas -->
-                    <div>
-                        <label for="context" class="form-label block mb-2">Contexte de l'évolution</label>
-                        <textarea id="context" name="context" rows="3" class="form-textarea" placeholder="Décrire le contexte et les discussions en comité."></textarea>
-                    </div>
-                    <div>
-                        <label for="why" class="form-label block mb-2">Pourquoi cette évolution ?</label>
-                        <textarea id="why" name="why" rows="3" class="form-textarea" placeholder="Quel est l'objectif annoncé ? (ex: améliorer la reproductibilité, répondre à un accident, nouvelle technologie)"></textarea>
-                    </div>
-                    <div>
-                        <label for="what-changed" class="form-label block mb-2">Qu'est-ce qui a changé ?</label>
-                        <textarea id="what-changed" name="what-changed" rows="4" class="form-textarea" placeholder="Décrire en détail la nouvelle exigence, méthode de test ou modification." required></textarea>
-                    </div>
-
-                    <!-- Products & Deadline -->
+                    <div><label for="context" class="form-label block mb-2">Contexte de l'évolution</label><textarea id="context" name="context" rows="3" class="form-textarea" placeholder="Décrire le contexte et les discussions en comité."></textarea></div>
+                    <div><label for="why" class="form-label block mb-2">Pourquoi cette évolution ?</label><textarea id="why" name="why" rows="3" class="form-textarea" placeholder="Quel est l'objectif annoncé ?"></textarea></div>
+                    <div><label for="what-changed" class="form-label block mb-2">Qu'est-ce qui a changé ?</label><textarea id="what-changed" name="what-changed" rows="4" class="form-textarea" placeholder="Décrire en détail la nouvelle exigence, méthode de test ou modification." required></textarea></div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="current-products" class="form-label block mb-2">Produits actuels concernés</label>
-                            <input type="text" id="current-products" name="current-products" class="form-input" placeholder="Ex : Harnais AVAO, ABSORBICA">
-                        </div>
-                        <div>
-                            <label for="new-dev" class="form-label block mb-2">Nouveaux projets de développement concernés</label>
-                            <input type="text" id="new-dev" name="new-dev" class="form-input" placeholder="Ex : Projet Condor, Longe Gen 5">
-                        </div>
+                        <div><label for="current-products" class="form-label block mb-2">Produits actuels concernés</label><input type="text" id="current-products" name="current-products" class="form-input" placeholder="Ex : Harnais AVAO, ABSORBICA"></div>
+                        <div><label for="new-dev" class="form-label block mb-2">Nouveaux projets de développement concernés</label><input type="text" id="new-dev" name="new-dev" class="form-input" placeholder="Ex : Projet Condor, Longe Gen 5"></div>
                     </div>
-                     <div>
-                        <label for="deadline" class="form-label block mb-2">Date limite pour retour technique</label>
-                        <input type="date" id="deadline" name="deadline" class="form-input" required>
-                    </div>
-
-                    <!-- Action Button for Part A -->
-                    <div class="pt-4 mt-4 border-t border-gray-200 text-right">
-                        <button type="button" id="submit-for-assessment" class="btn btn-primary">
-                            Soumettre pour Évaluation Technique <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
+                    <div><label for="deadline" class="form-label block mb-2">Date limite pour retour technique</label><input type="date" id="deadline" name="deadline" class="form-input" required></div>
+                    <div class="pt-4 mt-4 border-t border-gray-200 text-right"><button type="button" id="submit-for-assessment" class="btn btn-primary">Soumettre pour Évaluation <i class="fas fa-arrow-right ml-2"></i></button></div>
                 </div>
             </div>
 
@@ -206,164 +158,157 @@
             <div id="part-b" class="card section-locked">
                 <div class="card-header p-4 flex justify-between items-center">
                     <h2 class="text-xl font-semibold"><i class="fas fa-cogs mr-3" style="color: var(--petzl-text-dark);"></i>Partie B : Évaluation de l'Équipe Technique</h2>
-                     <i id="part-b-lock" class="fas fa-lock text-gray-400"></i>
+                    <i id="part-b-lock" class="fas fa-lock text-gray-400"></i>
                 </div>
                 <div class="p-6 space-y-6 section-content">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="assessed-by" class="form-label block mb-2">Évalué par (Équipe/Leader)</label>
-                            <input type="text" id="assessed-by" name="assessed-by" class="form-input" placeholder="Ex : Équipe Labo / J. Dupont" disabled>
-                        </div>
-                        <div>
-                            <label for="assessment-date" class="form-label block mb-2">Date de l'évaluation</label>
-                            <input type="date" id="assessment-date" name="assessment-date" class="form-input" disabled>
-                        </div>
+                        <div><label for="assessed-by" class="form-label block mb-2">Évalué par (Équipe/Leader)</label><input type="text" id="assessed-by" name="assessed-by" class="form-input" placeholder="Ex : Équipe Labo / J. Dupont" disabled required></div>
+                        <div><label for="assessment-date" class="form-label block mb-2">Date de l'évaluation</label><input type="date" id="assessment-date" name="assessment-date" class="form-input" disabled></div>
                     </div>
+                    <div><label for="impact-analysis" class="form-label block mb-2">Analyse d'Impact</label><textarea id="impact-analysis" name="impact-analysis" rows="4" class="form-textarea" placeholder="Détailler l'impact sur les produits, la conformité, les projets..." disabled required></textarea></div>
+                    <div><label for="action-plan" class="form-label block mb-2">Plan d'Action Proposé</label><textarea id="action-plan" name="action-plan" rows="4" class="form-textarea" placeholder="Proposer un plan d'action concret, les ressources nécessaires, etc." disabled required></textarea></div>
                     <div>
-                        <label for="action-plan" class="form-label block mb-2">Plan d'Action & Analyse d'Impact</label>
-                        <textarea id="action-plan" name="action-plan" rows="6" class="form-textarea" placeholder="Détailler l'impact sur les produits, les tests et le laboratoire. Proposer un plan d'action concret avec les tests à réaliser, les ressources nécessaires, etc." disabled></textarea>
+                        <label class="form-label block mb-2">Essais à réaliser ?</label>
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center"><input type="radio" id="tests-required-oui" name="tests-required" value="oui" class="mr-2" disabled>Oui</label>
+                            <label class="flex items-center"><input type="radio" id="tests-required-non" name="tests-required" value="non" class="mr-2" disabled>Non</label>
+                        </div>
                     </div>
-                     <!-- Action Button for Part B -->
-                    <div class="pt-4 mt-4 border-t border-gray-200 text-right">
-                        <button type="button" id="finalize-assessment" class="btn btn-primary btn-disabled">
-                            <i class="fas fa-check-circle mr-2"></i>Finaliser l'Évaluation
-                        </button>
-                    </div>
+                    <div class="pt-4 mt-4 border-t border-gray-200 text-right"><button type="button" id="finalize-assessment" class="btn btn-primary btn-disabled">Valider l'Évaluation <i class="fas fa-check-double ml-2"></i></button></div>
                 </div>
             </div>
+
+            <!-- Part C: Laboratory -->
+            <div id="part-c" class="card section-locked">
+                <div class="card-header p-4 flex justify-between items-center">
+                    <h2 class="text-xl font-semibold"><i class="fas fa-vial mr-3" style="color: var(--petzl-text-dark);"></i>Partie C : Rapport d'Essais Laboratoire</h2>
+                    <i id="part-c-lock" class="fas fa-lock text-gray-400"></i>
+                </div>
+                <div class="p-6 space-y-6 section-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label for="test-date" class="form-label block mb-2">Date des essais</label><input type="date" id="test-date" name="test-date" class="form-input" disabled required></div>
+                        <div><label for="test-report" class="form-label block mb-2">Rapport d'essais (pièce jointe)</label><input type="file" id="test-report" name="test-report" class="form-input" accept="image/*,application/pdf" disabled><div id="test-report-preview" class="mt-2"></div></div>
+                    </div>
+                    <div><label for="test-conclusion" class="form-label block mb-2">Conclusion des essais</label><textarea id="test-conclusion" name="test-conclusion" rows="5" class="form-textarea" placeholder="Résumer les résultats des tests et conclure sur la conformité ou les points de vigilance." disabled required></textarea></div>
+                    <div class="pt-4 mt-4 border-t border-gray-200 text-right"><button type="button" id="finalize-report" class="btn btn-primary btn-disabled">Clôturer la Fiche <i class="fas fa-flag-checkered ml-2"></i></button></div>
+                </div>
+            </div>
+
         </form>
     </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // ---ELEMENT SELECTORS---
-    const form = document.getElementById('impact-form');
-    const partA = document.getElementById('part-a');
-    const partB = document.getElementById('part-b');
-    const partALockIcon = document.getElementById('part-a-lock');
-    const partBLockIcon = document.getElementById('part-b-lock');
-
-    const standardInput = document.getElementById('standard');
-    const headerStandard = document.getElementById('header-standard');
-    const statusBadge = document.getElementById('status-badge');
-
-    const fileInput = document.getElementById('document');
-    const filePreview = document.getElementById('file-preview');
-
-    const submitBtn = document.getElementById('submit-for-assessment');
-    const finalizeBtn = document.getElementById('finalize-assessment');
-    
-    const assessmentDateInput = document.getElementById('assessment-date');
+    const partA = document.getElementById('part-a'), partB = document.getElementById('part-b'), partC = document.getElementById('part-c');
+    const partALock = document.getElementById('part-a-lock'), partBLock = document.getElementById('part-b-lock'), partCLock = document.getElementById('part-c-lock');
+    const standardInput = document.getElementById('standard'), headerStandard = document.getElementById('header-standard'), statusBadge = document.getElementById('status-badge');
+    const fileInput = document.getElementById('document'), filePreview = document.getElementById('file-preview');
+    const testReportInput = document.getElementById('test-report'), testReportPreview = document.getElementById('test-report-preview');
+    const submitBtnA = document.getElementById('submit-for-assessment'), submitBtnB = document.getElementById('finalize-assessment'), submitBtnC = document.getElementById('finalize-report');
+    const assessmentDateInput = document.getElementById('assessment-date'), testDateInput = document.getElementById('test-date');
+    const testsRequiredOui = document.getElementById('tests-required-oui'), testsRequiredNon = document.getElementById('tests-required-non');
 
     // ---INPUT GROUPS---
     const partAInputs = partA.querySelectorAll('input, textarea, select');
     const partBInputs = partB.querySelectorAll('input, textarea, select');
+    const partCInputs = partC.querySelectorAll('input, textarea, select');
 
     // ---EVENT LISTENERS---
-    
-    // Update header as standard is typed
-    standardInput.addEventListener('input', () => {
-        headerStandard.textContent = standardInput.value ? `Norme : ${standardInput.value}` : 'Norme : (Non définie)';
-    });
-
-    // Handle file input change
-    fileInput.addEventListener('change', handleFileChange);
-
-    // Handle button clicks
-    submitBtn.addEventListener('click', submitForAssessment);
-    finalizeBtn.addEventListener('click', finalizeAssessment);
+    standardInput.addEventListener('input', () => { headerStandard.textContent = standardInput.value ? `Norme : ${standardInput.value}` : 'Norme : (Non définie)'; });
+    fileInput.addEventListener('change', () => handleFileChange(fileInput, filePreview));
+    testReportInput.addEventListener('change', () => handleFileChange(testReportInput, testReportPreview));
+    submitBtnA.addEventListener('click', submitPartA);
+    submitBtnB.addEventListener('click', submitPartB);
+    submitBtnC.addEventListener('click', submitPartC);
 
     // ---FUNCTIONS---
-
-    function handleFileChange() {
-        filePreview.innerHTML = '';
-        const file = fileInput.files[0];
+    function handleFileChange(input, preview) {
+        preview.innerHTML = '';
+        const file = input.files[0];
         if (!file) return;
-
-        if (file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'mt-2 rounded-lg max-h-48 border border-gray-200';
-                filePreview.appendChild(img);
-            }
-            reader.readAsDataURL(file);
-        } else {
-            const fileInfo = document.createElement('div');
-            fileInfo.className = 'mt-2 p-3 bg-gray-100 rounded-lg text-gray-700 text-sm flex items-center';
-            const icon = file.type === 'application/pdf' ? 'fa-file-pdf' : 'fa-file-alt';
-            fileInfo.innerHTML = `<i class="fas ${icon} mr-2 text-red-500"></i> ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
-            filePreview.appendChild(fileInfo);
-        }
+        const fileInfo = document.createElement('div');
+        fileInfo.className = 'mt-2 p-3 bg-gray-100 rounded-lg text-gray-700 text-sm flex items-center';
+        const icon = file.type === 'application/pdf' ? 'fa-file-pdf' : 'fa-file-alt';
+        fileInfo.innerHTML = `<i class="fas ${icon} mr-2 text-red-500"></i> ${file.name}`;
+        preview.appendChild(fileInfo);
     }
 
-    function submitForAssessment() {
+    function validateInputs(inputs) {
         let isValid = true;
-        partAInputs.forEach(input => {
+        inputs.forEach(input => {
             if (input.required && !input.value) {
                 isValid = false;
                 input.style.borderColor = 'red';
-            } else {
+            } else if (input.type === 'radio' && input.name) {
+                const radioGroup = document.querySelectorAll(`input[name="${input.name}"]`);
+                if (![...radioGroup].some(r => r.checked)) {
+                    isValid = false;
+                    radioGroup.forEach(r => r.parentElement.style.color = 'red');
+                } else {
+                     radioGroup.forEach(r => r.parentElement.style.color = '');
+                }
+            }
+            else {
                  input.style.borderColor = '';
             }
         });
+        return isValid;
+    }
 
-        if (!isValid) {
-            alert("Veuillez remplir tous les champs obligatoires de la Partie A.");
-            return;
-        }
-
+    function submitPartA() {
+        if (!validateInputs(partAInputs)) { alert("Veuillez remplir tous les champs obligatoires de la Partie A."); return; }
         // Lock Part A
         partA.classList.add('section-locked');
-        partALockIcon.classList.remove('fa-lock-open');
-        partALockIcon.classList.add('fa-lock');
-        submitBtn.classList.add('btn-disabled');
-        submitBtn.disabled = true;
-
+        partALock.className = 'fas fa-lock text-gray-400';
+        submitBtnA.classList.add('btn-disabled');
         // Unlock Part B
         partB.classList.remove('section-locked');
         partBInputs.forEach(input => input.disabled = false);
-        partBLockIcon.classList.remove('fa-lock');
-        partBLockIcon.classList.add('fa-lock-open');
-        finalizeBtn.classList.remove('btn-disabled');
-        finalizeBtn.disabled = false;
-        
+        partBLock.className = 'fas fa-lock-open text-gray-400';
+        submitBtnB.classList.remove('btn-disabled');
         assessmentDateInput.value = new Date().toISOString().split('T')[0];
-
         // Update status
         statusBadge.textContent = 'En Évaluation';
         statusBadge.className = 'status-badge status-assessment';
-        partB.querySelector('h2 i').style.color = 'var(--petzl-text-dark)';
     }
 
-    function finalizeAssessment() {
-        let isValid = true;
-         partBInputs.forEach(input => {
-            if (!input.value) { // All fields in part B are considered required for finalization
-                isValid = false;
-                input.style.borderColor = 'red';
-            } else {
-                 input.style.borderColor = '';
-            }
-        });
-
-        if (!isValid) {
-            alert("Veuillez remplir tous les champs de la Partie B avant de finaliser.");
-            return;
-        }
-
+    function submitPartB() {
+        if (!validateInputs(partBInputs)) { alert("Veuillez remplir tous les champs et faire un choix pour les essais."); return; }
         // Lock Part B
         partB.classList.add('section-locked');
-        partBLockIcon.classList.remove('fa-lock-open');
-        partBLockIcon.classList.add('fa-lock');
-        finalizeBtn.classList.add('btn-disabled');
-        finalizeBtn.disabled = true;
+        partBLock.className = 'fas fa-lock text-gray-400';
+        submitBtnB.classList.add('btn-disabled');
 
-        // Update status
+        if (testsRequiredOui.checked) {
+            // Unlock Part C
+            partC.classList.remove('section-locked');
+            partCInputs.forEach(input => input.disabled = false);
+            partCLock.className = 'fas fa-lock-open text-gray-400';
+            submitBtnC.classList.remove('btn-disabled');
+            testDateInput.value = new Date().toISOString().split('T')[0];
+            // Update status
+            statusBadge.textContent = 'En Attente Labo';
+            statusBadge.className = 'status-badge status-lab';
+            partC.querySelector('h2 i').style.color = 'var(--petzl-orange)';
+        } else {
+            // End workflow
+            statusBadge.textContent = 'Terminé';
+            statusBadge.className = 'status-badge status-complete';
+            partB.querySelector('h2 i').style.color = 'var(--status-complete-text)';
+        }
+    }
+
+    function submitPartC() {
+        if (!validateInputs(partCInputs)) { alert("Veuillez remplir tous les champs obligatoires de la Partie C."); return; }
+        // Lock Part C
+        partC.classList.add('section-locked');
+        partCLock.className = 'fas fa-lock text-gray-400';
+        submitBtnC.classList.add('btn-disabled');
+        // Finalize
         statusBadge.textContent = 'Terminé';
         statusBadge.className = 'status-badge status-complete';
-        partB.querySelector('h2 i').style.color = 'var(--status-complete-text)';
+        partC.querySelector('h2 i').style.color = 'var(--status-complete-text)';
     }
 });
 </script>
